@@ -44,6 +44,19 @@ export default [
           },
         ],
       },
+      {
+        path: '/tableScore',
+        icon: 'form',
+        name: 'tableScore',
+        component: '../pages/TableScore',
+        routes: [
+          {
+            path: '/tableScore/Eng',
+            name: 'EngScore',
+            component: '../pages/TableScore/Eng',
+          },
+        ],
+      },
       // forms
       {
         path: '/form',

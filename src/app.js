@@ -9,7 +9,6 @@ export const dva = {
 };
 
 // just for test
-
 let authRoutes = {};
 
 function ergodicRoutes(routes, authKey, authority) {
