@@ -1,104 +1,53 @@
 import React from 'react';
-import { Table, Divider, Tag } from 'antd';
+
 import Eng from './Eng';
 
 class TableScore extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      selectedItemName: 'init',
+    };
+  }
+
+  componentWillMount() {
+    console.log('componentWillMount-TableScore', '1111');
   }
 
   componentDidMount() {
-    console.log(1);
+    console.log('componentDidMount-TableScore', '2222');
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('nextProps', nextProps, 2);
+  componentWillReceiveProps() {
+    console.log('componentWillReceiveProps-TableScore', '5555');
+  }
+
+  shouldComponentUpdate() {
+    console.log('shouldComponentUpdate-TableScore', '6666');
+    return true;
+  }
+
+  componentWillUpdate() {
+    console.log('componentWillUpdate-TableScore', '3333');
   }
 
   componentDidUpdate() {
-    console.log(3);
+    console.log('componentDidUpdate-TableScore', '4444');
   }
 
-  render() {
-    const columns = [
-      {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        render: text => <a>{text}</a>,
-      },
-      {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-      },
-      {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
-      },
-      {
-        title: 'Tags',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: tags => (
-          <span>
-            {tags.map(tag => {
-              let color = tag.length > 5 ? 'geekblue' : 'green';
-              if (tag === 'loser') {
-                color = 'volcano';
-              }
-              return (
-                <Tag color={color} key={tag}>
-                  {tag.toUpperCase()}
-                </Tag>
-              );
-            })}
-          </span>
-        ),
-      },
-      {
-        title: 'Action',
-        key: 'action',
-        render: (text, record) => (
-          <span>
-            <a>Invite {record.name}</a>
-            <Divider type="vertical" />
-            <a>Delete</a>
-          </span>
-        ),
-      },
-    ];
+  handleSelectedItemName = (text, record) => {
+    console.log('2323232323', record);
+    this.setState({ selectedItemName: text });
+    console.log('eeeeeeeeeeee', text);
+  };
 
-    const data = [
-      {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-      },
-      {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-      },
-      {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-      },
-    ];
-    console.log('father4');
+  render() {
+    const { selectedItemName } = this.state;
+    console.log('eeeeeeeeeeeeFatherRender', selectedItemName);
     return (
-      <div>
-        <Eng />
-        <Table columns={columns} dataSource={data} />
+      <div style={{ padding: '20px', backgroundColor: 'blue' }}>
+        <span style={{ color: 'white' }}>{selectedItemName}</span>
+        <Eng handleSelectedItem={this.handleSelectedItemName} />
       </div>
     );
   }
