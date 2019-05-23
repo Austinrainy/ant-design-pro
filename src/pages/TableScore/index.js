@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Modal } from 'antd';
 import Eng from './Eng';
 
 class TableScore extends React.Component {
@@ -7,6 +7,7 @@ class TableScore extends React.Component {
     super(props);
     this.state = {
       selectedItemName: 'init',
+      visible: false,
     };
   }
 
@@ -41,12 +42,46 @@ class TableScore extends React.Component {
     console.log('eeeeeeeeeeee', text);
   };
 
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
   render() {
-    const { selectedItemName } = this.state;
+    const { selectedItemName, visible } = this.state;
     console.log('eeeeeeeeeeeeFatherRender', selectedItemName);
     return (
       <div style={{ padding: '20px', backgroundColor: 'blue' }}>
-        <span style={{ color: 'white' }}>{selectedItemName}</span>
+        <span style={{ color: 'white' }} onClick={this.showModal}>
+          {selectedItemName}
+        </span>
+        <Modal
+          title="Basic Modal"
+          visible={visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+          okButtonProps={{ disabled: false }}
+          cancelButtonProps={{ disabled: false }}
+        >
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal>
         <Eng handleSelectedItem={this.handleSelectedItemName} />
       </div>
     );
