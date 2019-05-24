@@ -113,9 +113,21 @@ class Eng extends React.Component {
     // const { handleSelectedItemName } = this.props;
     const { columns, data } = this.state;
     console.log('Eng', '1212121212');
+    const rowSelection = {
+      onChange: (selectedRowKeys, selectedRows) => {
+        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+      },
+      getCheckboxProps: record => ({
+        // disabled: record.name === 'Disabled User', // Column configuration not to be checked
+        name: record.name,
+      }),
+      hideDefaultSelections: true,
+      selectedRowKeys: ['1', '2'],
+    };
+
     return (
       <div style={{ marginTop: '20px', padding: '10px', backgroundColor: '#f2f2f2' }}>
-        <Table columns={columns} dataSource={data} />
+        <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
       </div>
     );
   }
